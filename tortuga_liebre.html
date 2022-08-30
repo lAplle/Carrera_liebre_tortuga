@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Avance {
+            movimiento(){
+                return Math.random()*10 + 1;
+            }
+        }
+
+        class Corredor {
+            constructor (animal) {
+                this.animal = animal;
+                this.avance = new Avance();
+                this.posicion = 0;
+            }
+            
+            info() {
+                return this.animal + ' está en ' + this.posicion;
+            }
+
+            correr_tortuga() {
+                let movimiento = this.avance.movimiento();
+                
+                if (movimiento <= 2) {
+                    this.posicion -= 6;
+                } else if (movimiento <= 5) {
+                    this.posicion += 1;
+                } else {
+                    this.posicion += 3;
+                }
+            }
+
+            correr_liebre() {
+                let movimiento = this.avance.movimiento();
+
+                if (movimiento <= 2) {
+                    this.posicion += 9;
+                } else if (movimiento <= 3) {
+                    this.posicion -= 12;
+                } else if (movimiento <= 6.5) {
+                    this.posicion += 1;
+                } else if (movimiento <= 8) {
+                    this.posicion -= 2;
+                }
+            }
+        }
+
+        let tortuga = new Corredor('tortuga');
+        let liebre = new Corredor('liebre');
+        
+        while (tortuga.posicion < 100 && liebre.posicion < 100) {            
+            tortuga.correr_tortuga()
+            liebre.correr_liebre()
+            console.log(tortuga.info() + ', ' + liebre.info() + '.');
+        }
+        if (tortuga.posicion == 99 && liebre.posicion == 99) {
+            console.log('Empate!');
+        } else if (tortuga.posicion >= 100) {
+            console.log('La tortuga ha ganado!');
+        } else if (liebre.posicion >= 100) {
+            console.log('La liebre ha ganado!');
+        }
+    </script>
+</body>
+</html> 
